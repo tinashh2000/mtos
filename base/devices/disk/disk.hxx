@@ -1,0 +1,1 @@
+STOR_DEV Storage_Devices[MAX_DRIVES];

@@ -1,0 +1,40 @@
+#include "input/input.h"
+#include "output/output.h"
+
+typedef MWORD (*SENDUIMESSAGEPROC)(MWORD msg,MWORD msgWord1,MWORD msgWord2,MWORD msgWord3,MWORD msgWord4);
+//typedef MWORD(*UICALLBACK)(MWORD msg, MWORD p1, MWORD p2, MWORD p3);
+//UICALLBACK UiCallback;
+
+EXPORTSTART
+	MWORD	UiCallback(MWORD msg, MWORD p1, MWORD p2, MWORD p3); //Must be defined by UI engine
+	MWORD	__CDECL _UiCallback(MWORD msg, MWORD p1, MWORD p2, MWORD p3);
+	BOOL	SetUiProcess(TH_PROCESS p);
+	TH_PROCESS	GetUiProcess(void);
+EXPORTEND
+
+typedef struct {
+	INPUTHANDLERS	i;
+	OUTPUTHANDLERS	o;
+	SENDUIMESSAGEPROC   SendUiMessage;
+} UIIOHANDLERS;
+
+enum {
+    UIM_GETIOHANDLERS=1,    //Get IO handlers
+    UIM_START,               //Init and start UI system	
+	UIM_REGISTER_KEYBOARD,
+	UIM_UNREGISTER_KEYBOARD,
+	UIM_REGISTER_MOUSE,
+	UIM_UNREGISTER_MOUSE,
+	UIM_REGISTER_TOUCH,
+	UIM_UNREGISTER_TOUCH,
+	UIM_REGISTER_SOUNDOUT,
+	UIM_UNREGISTER_SOUNDOUT,
+	UIM_REGISTERSOUNDIN,
+	UIM_UNREGISTERSOUNDIN
+};
+
+enum {
+	ESC_FORECOLOR = 1,
+	ESC_BACKCOLOR,
+	ESC_SETPOS
+};

@@ -1,0 +1,30 @@
+INCLUDE "PROLOG.AS"
+
+EXTERN _strlen
+PUBLIC strrchr, _strrchr
+
+strrchr:
+_strrchr    PROC    block:MEMPTR,chr:MWORD
+	PUSHFD
+	PUSH	ECX,EDI
+	MOV	EDI,block
+	CALL	_strlen,EDI
+	ADD	ESP,(SIZE MWORD)
+	MOV	ECX,EAX
+	ADD	EDI,ECX
+	DEC	EDI	
+    MOV AL,chr
+	STD
+	REPNZ	SCASB
+	MOV	EAX,0
+	JNZ	srcDone
+	MOV	EAX,EDI
+	DEC	EAX
+ srcDone:	
+	POP	EDI,ECX
+	POPFD
+    RET 0
+
+_strrchr	ENDP
+
+INCLUDE "EPILOG.AS"

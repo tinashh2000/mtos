@@ -1,0 +1,11 @@
+DEL *.LIB
+DEL *.OBJ
+
+cl /GS- /I\MTOS\INCLUDE *.c /c
+IF ERRORLEVEL 1 goto EndMake
+
+LIB *.obj
+REN *.LIB CLIB.LIB
+
+COPY CLIB.LIB \MTOS\OBJ
+: EndMake

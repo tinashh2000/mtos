@@ -1,0 +1,23 @@
+#ifdef __MTOS_DO
+#include <mtos.h>
+#include <time.h>
+#include <sys/stat.h>
+#include <math.h>
+#include <semaphore.h>
+#include <locale.h>
+#define ___NI	"%s not implemented ", __FILE__
+
+#define UNIMP(fx)	printf("%s is not implemented in %s, line: %i",fx,__FILE__, __LINE__);\
+				while(1);
+EXPORT int errno;
+
+int errno;
+
+struct timespec {
+    time_t tv_sec;
+    long tv_nsec;
+};
+
+
+
+#endif

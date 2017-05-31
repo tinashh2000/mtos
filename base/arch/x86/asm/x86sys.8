@@ -1,0 +1,48 @@
+_kUninitItems LABEL
+DB "Uninit Start"
+
+        DB  512 DUP(?)
+_KernelStack LABEL
+        DD  ?
+
+
+SystemTicks DD  ?
+            DD  ?
+
+mode    DB  ?
+numCPUs DD  ?
+
+CPUString   DB  13 DUP(?)
+
+
+V8259   DD  ?
+
+;KernelImageBase     DQ  ?
+;KernelImageEnd      DQ  ?
+;KernelPEStart       DQ  ?
+;KernelSize          DQ  ?
+;DefaultOutput       DD  ?
+;LoaderParamsPTR     MEMPTR ?
+;BootImageAddr       MEMPTR ?
+;_BootImageAddr       MEMPTR ?
+;VideoWidth          DD  ?
+;VideoHeight         DD  ?
+
+;wWidth      DD  ?
+;wHeight     DD  ?
+;wX          DD  ?
+;wY          DD  ?
+
+x86MediaFlags   DD  ?
+x86SSEVersion   DD  ?
+LastFPUThread   LABEL MWORD
+            DD  (MAX_CPUS) DUP(?)
+
+INCLUDE "RTC.8"
+INCLUDE "INTR\INTVEC.8"
+
+_kUninitItemsEnd LABEL
+
+
+DB "Uninit END"
+

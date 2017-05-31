@@ -1,0 +1,14 @@
+#include <thread/debug.h>
+
+enum DEBUGINSTR {
+	DBG_STEPINTO=1,
+	DBG_STEPOVER,
+	DBG_PRINTREGS,
+	DBG_RUN,
+	DBG_SKIP
+};
+
+EXPORTSTART
+void	DebugProcess(MEMPTR addr,DEBUGCONTEXT *dc);
+BOOL	DebugArchRun(DEBUGCONTEXT *dc);
+EXPORTEND
