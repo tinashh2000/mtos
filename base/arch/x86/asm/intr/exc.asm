@@ -20,9 +20,13 @@ PMException:
 	MOV	DS,EAX
 	MOV	ES,EAX
 
+
 	CALL	GetCurrentThread
+
 	CALL	GetThreadName,EAX,(_ExcThreadName)
+	CALL	PrintHexD,esp
     CALL	Hex32ToStr, MWORD (_ExcEBP), [EBP][(SPOFS + 0)],MWORD (8), MWORD (9)
+	CALL	PrintHexD,esp
     CALL	Hex32ToStr, MWORD (_ExcEDI), [EBP][(SPOFS + 4)],MWORD (8), MWORD (9)
     CALL	Hex32ToStr, MWORD (_ExcESI), [EBP][(SPOFS + 8)],MWORD (8), MWORD (9)
     CALL	Hex32ToStr, MWORD (_ExcEDX), [EBP][(SPOFS + 12)],MWORD (8), MWORD (9)
@@ -93,6 +97,7 @@ IRQ2:
     IRETD
 
 BreakPoint:
+	
 	CLD
 	PUSH	DWORD (_Int3)
 	JMP		PMException

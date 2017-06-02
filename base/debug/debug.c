@@ -53,12 +53,19 @@ void DebugSkip() {
 	dbgInstr = DBG_SKIP;
 }
 
+void byteDumps(char*dumpad, int nbytes) {
+	for (int c = 0; c < nbytes; c++) {
+		printf(" %02x", dumpad[c] & 0xff);
+	}
+}
+
 void	DebugDump() {
 	int c;
 	char *dumpptr = (char*)DebugDumpAddress;
+	char *dumplinestart = dumpptr;
 	UINT32	value64;
 	UINT32	nItems=0;
-	UINT32 	nItemsPerCol = (DebugDumpSize < 16) ? 32 / DebugDumpSize : 32;
+	UINT32 	nItemsPerCol = (DebugDumpSize < 16) ? 32 / DebugDumpSize : 20;
 	printf("\r\nDump Address: 0x%08x\r\n",dumpptr);
 	for (c=0;c<DebugDumpBytes;c++) {
 		if (DebugDumpSize == 1) {
@@ -81,11 +88,22 @@ void	DebugDump() {
 		}
 
 		if (nItems++ >= nItemsPerCol) {
+			if (DebugDumpSize == 255)
+				byteDumps(dumplinestart,nItems);
+
+			dumplinestart = dumpptr;
 			nItems = 0;
 			printf("\r\n");
 		}
 
 	}
+
+	if (DebugDumpSize == 255) {
+		while (nItems++ <= nItemsPerCol)
+			printf(" ");
+		byteDumps(dumplinestart, nItems-1);
+	}
+
 	DebugDumpAddress = (MEMPTR) dumpptr;
 }
 
