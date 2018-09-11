@@ -1,0 +1,12 @@
+memmove
+memcpy
+strnlen
+memcmp
+wmemcpy
+wcslen
+wcscpy
+wmemcpy
+wmemchr
+strlen
+strcpy
+memset32
