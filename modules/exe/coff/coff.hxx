@@ -1,0 +1,1 @@
+EXPORT char peSignature[4] = {'P', 'E', 0, 0};

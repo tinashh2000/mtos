@@ -1,0 +1,2 @@
+The Stream API is designed for other APIS and devices to send or accept data thru a generalized API. Examples for such devices are audio playback or recording devices, video playback or recording devices (cameras), internet connections etc
+A data stream might not have addresses but contains data as a continuous stream
